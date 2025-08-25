@@ -14,7 +14,7 @@ function checkPassword() {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  // Waits for user input via modal
+  // Wait for user to enter password before starting game
 });
 
 function initializeGame() {
@@ -25,6 +25,7 @@ function initializeGame() {
   const startBtn = document.getElementById("startBtn");
   const gameOverText = document.getElementById("gameOverText");
   const restartBtn = document.getElementById("restartBtn");
+  const gameContainer = document.querySelector(".game-container");
 
   let isJumping = false;
   let isPaused = false;
@@ -59,8 +60,16 @@ function initializeGame() {
     }, 20);
   }
 
+  // ✅ Keyboard control (PC)
   document.addEventListener("keydown", (e) => {
     if (e.code === "Space" || e.code === "ArrowUp") {
+      jump();
+    }
+  });
+
+  // ✅ Tap-to-jump support (Mobile)
+  gameContainer.addEventListener("touchstart", (e) => {
+    if (!e.target.closest("button")) {
       jump();
     }
   });
